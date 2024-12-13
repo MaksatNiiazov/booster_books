@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -9,7 +10,7 @@ from .models import Book, Author
 from .serializers import BookSerializer, AuthorSerializer, BookCreateSerializer
 
 
-class BookViewSet(ModelViewSet):
+class BookViewSet(ModelViewSet, LoginRequiredMixin):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
     filter_backends = [DjangoFilterBackend, OrderingFilter]
@@ -18,12 +19,12 @@ class BookViewSet(ModelViewSet):
     ordering_fields = ['title', 'published_date']
 
 
-class AuthorViewSet(ModelViewSet):
+class AuthorViewSet(ModelViewSet, LoginRequiredMixin):
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
 
 
-class BookListView(APIView):
+class BookListView(APIView, LoginRequiredMixin):
 
     def get(self, request):
         queryset = Book.objects.all()
