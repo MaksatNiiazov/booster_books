@@ -5,7 +5,7 @@ from books.views import BookViewSet, AuthorViewSet, \
 from rest_framework.routers import DefaultRouter
 from rest_framework.authtoken.views import obtain_auth_token
 router = DefaultRouter()
-router.register('books/', BookViewSet, basename='book')
+router.register('books', BookViewSet, basename='book')
 
 router.register('authors/', AuthorViewSet, basename='author')
 
